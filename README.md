@@ -1,68 +1,94 @@
-# Melbourne Housing Data Cleaning Project
+#Melbourne Housing Data Cleaning Project
+# Project Description
 
-## Project Purpose
+This project focuses on cleaning and preparing a real estate dataset of Melbourne housing sales. The objective was to apply data wrangling techniques using Python to prepare the data for SQL-based analysis and visualization. This process ensures clean, reliable, and SQL-compatible data for deeper analysis of housing market trends, pricing, and regional characteristics.
+# Dataset
 
-The purpose of this project is to clean and prepare the Melbourne Housing Market dataset for further analysis and SQL-based querying. This step-by-step cleaning pipeline ensures the dataset is free from missing values, type inconsistencies, and structural anomalies. It prepares the data for tasks like exploratory data analysis (EDA), feature engineering, or machine learning.
+    Source: Melbourne housing dataset
 
----
+    Rows: 13,580
 
-## Skills Used
+    Columns: 21
 
-- Data Cleaning
-- Data Type Conversion
-- Missing Value Imputation
-- Feature Engineering
-- Logical Validation
-- CSV Exporting
+The dataset includes information about property sales such as suburb, address, number of rooms, type, price, sale method, seller, date of sale, distance from the city, postcode, number of bedrooms and bathrooms, car spaces, land size, building area, year built, council area, latitude, longitude, region name, and property count.
+# Data Cleaning Steps
 
----
+The following steps were applied using Python (Pandas):
 
-##  Tools Used
+## Missing values
 
-- Python
-- pandas
-- Jupyter Notebook
-- Excel (for verification)
+    Car: Filled missing values with 0 assuming no car space.
 
----
+    BuildingArea: Filled missing values using median area by Rooms, fallback to overall median for rare room counts.
 
-## Process Summary
+    YearBuilt: Left as NULL to avoid introducing bias — ensures age-related analysis remains accurate.
 
-### 1. Convert Data Types
-- `Date` converted from string to `datetime64`
-- `Postcode` converted from float to string
+    CouncilArea: Filled missing values with "Unknown" for SQL-friendly grouping and filtering.
 
-### 2. Handle Missing Values
-- `Car`: Filled missing values with median (`2.0`)
-- `CouncilArea`: Filled with mode (most common value)
-- Dropped `BuildingArea` and `YearBuilt` due to excessive missing values
+##Data type conversions
 
-### 3. Rename Columns for Clarity
-- Renamed `Bedroom2` to `Bedrooms`
+    Date: Converted to datetime, then reformatted to mm/dd/yyyy string for consistency.
 
-### 4. Flag Logical Inconsistencies
-- Created `room_bedroom_mismatch` column where `Rooms < Bedrooms`
+    Postcode, Propertycount, Car, Rooms, Price, Bedroom2, Bathroom: Converted to integers for accuracy.
 
----
+    YearBuilt: Left as float to retain NULL values (as Pandas requires float for NaN).
 
-## 📤 Final Output
+# Duplicates
 
-- Cleaned dataset saved as: `cleaned_melbourne_data.csv`
-- All missing values handled
-- Data structure suitable for SQL or machine learning
+    Checked and confirmed no duplicate rows in the dataset.
 
----
+# Outlier flagging
 
-## 📂 File Overview
+    Flagged outliers in Price, Landsize, and BuildingArea if values exceeded the 99th percentile.
 
-| File Name | Description |
-|-----------|-------------|
-| `cleaned_melbourne_data.csv` | Final cleaned dataset |
-| `melbourne_cleaning.ipynb` | Notebook with full cleaning process |
-| `README.md` | Project overview |
+    Added an is_outlier column (1 = outlier, 0 = typical data).
 
----
+# Export
 
-## ✍️ Author
-https://www.kaggle.com/datasets/dansbecker/melbourne-housing-snapshot/data
+    Final cleaned dataset saved as cleaned_melb_data.xlsx (Excel format for ease of use).
 
+#Planned Analysis
+
+After loading the cleaned data into SQL, the following analysis can be performed:
+
+    Average property price by suburb or council area.
+
+    Distribution of property sizes and prices, excluding outliers.
+
+    Time trends in housing prices.
+
+    Regional comparisons using Regionname and CouncilArea.
+
+    Car space and room count influence on price.
+
+Example SQL query:
+
+SELECT CouncilArea, AVG(Price) AS avg_price
+FROM cleaned_melb_data
+WHERE is_outlier = 0
+GROUP BY CouncilArea
+ORDER BY avg_price DESC;
+
+# Tools Used
+
+    Python (Pandas, Jupyter)
+
+    Excel (for data export)
+
+    SQL (planned: PostgreSQL / MySQL / SQLite)
+
+# Files
+
+    cleaned_melb_data.xlsx — Cleaned and ready for SQL import.
+
+# Key Takeaways
+
+    Applied best practices in data cleaning with clear, justifiable steps.
+
+    Retained data integrity by thoughtfully handling missing values and outliers.
+
+    Prepared dataset for flexible, reliable SQL analysis.
+
+# Author
+[
+[Your Name] — [GitHub Profile Link]](https://www.kaggle.com/datasets/dansbecker/melbourne-housing-snapshot/data)
