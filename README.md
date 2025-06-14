@@ -100,25 +100,11 @@ ORDER BY
 - [See full SQL analysis queries](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_sql_analysis.sql)
 
 
-## Tools Used
-
-    Python (Pandas, Jupyter)
-
-    Excel (for data export)
-
-    SQL (planned: PostgreSQL / MySQL / SQLite)
 
 ## Files
 
     cleaned_melb_data.xlsx — Cleaned and ready for SQL import.
 
-## Key Takeaways
-
-    Applied best practices in data cleaning with clear, justifiable steps.
-
-    Retained data integrity by thoughtfully handling missing values and outliers.
-
-    Prepared dataset for flexible, reliable SQL analysis.
 
 ## Author
 
