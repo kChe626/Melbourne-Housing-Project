@@ -60,7 +60,7 @@ The following steps were applied using Python (Pandas):
 
     Final cleaned dataset saved as cleaned_melb_data.xlsx (Excel format for ease of use).
 
-[See full cleaning code](Melbourne_Housing_Cleaning.ipynb)
+[See full cleaning code](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Melbourne%20Housing.ipynb)
 ---
 
 ##  SQL Analysis & Business Insights
