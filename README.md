@@ -43,6 +43,8 @@ The following steps were applied using Python (Pandas):
     Postcode, Propertycount, Car, Rooms, Price, Bedroom2, Bathroom: Converted to integers for accuracy.
 
     YearBuilt: Left as float to retain NULL values (as Pandas requires float for NaN).
+--- 
+
 
 ### Duplicates
 
@@ -58,29 +60,45 @@ The following steps were applied using Python (Pandas):
 
     Final cleaned dataset saved as cleaned_melb_data.xlsx (Excel format for ease of use).
 
+[See full cleaning code](Melbourne_Housing_Cleaning.ipynb)
 ---
 
-## Planned Analysis
+##  SQL Analysis & Business Insights
+Below are example SQL queries used to analyze the cleaned Melbourne housing data.
 
-After loading the cleaned data into SQL, the following analysis can be performed:
+### What is the average price by council area (excluding outliers)?
+```sql
+SELECT 
+    CouncilArea, 
+    ROUND(AVG(Price), 2) AS avg_price
+FROM 
+    cleaned_melb_data
+WHERE 
+    is_outlier = 0
+GROUP BY 
+    CouncilArea
+ORDER BY 
+    avg_price DESC;
+```
 
-    Average property price by suburb or council area.
+### How did average price change by year or month?
 
-    Distribution of property sizes and prices, excluding outliers.
+```sql
+SELECT
+    SUBSTRING(Date, 7, 4) AS SaleYear,
+    ROUND(AVG(Price), 2) AS avg_price
+FROM
+    cleaned_melb_data
+WHERE
+    is_outlier = 0
+GROUP BY
+    SaleYear
+ORDER BY
+    SaleYear;
+```
 
-    Time trends in housing prices.
+[See full SQL analysis queries](sql/analysis_queries.sql)
 
-    Regional comparisons using Regionname and CouncilArea.
-
-    Car space and room count influence on price.
-
-Example SQL query:
-
-SELECT CouncilArea, AVG(Price) AS avg_price
-FROM cleaned_melb_data
-WHERE is_outlier = 0
-GROUP BY CouncilArea
-ORDER BY avg_price DESC;
 
 ## Tools Used
 
