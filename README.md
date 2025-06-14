@@ -97,7 +97,7 @@ ORDER BY
     SaleYear;
 ```
 
-- [See full SQL analysis queries](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Melbourne%20Housing.ipynb)
+- [See full SQL analysis queries](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_sql_analysis.sql)
 
 
 ## Tools Used
