@@ -24,41 +24,38 @@ The dataset includes information about property sales such as suburb, address, n
 
 ## Data Cleaning Steps
 
-The following steps were applied using Python (Pandas):
+### Remove unnecessary columns
 
-### Missing values
+Removed columns that don’t contribute to analysis or have excessive missing data.
+```python
+df_cleaned = df.drop(columns=["Address"])
+df_cleaned = df_cleaned.drop(columns=["BuildingArea", "YearBuilt"])
+```
 
-    Car: Filled missing values with 0 assuming no car space.
+### Handle missing data
+Filled or removed missing values to clean the dataset.
+```pyhton
+# Fill missing 'Car' values with 0
+df_cleaned["Car"] = df_cleaned["Car"].fillna(0)
 
-    BuildingArea: Filled missing values using median area by Rooms, fallback to overall median for rare room counts.
+# Drop rows where 'CouncilArea' is missing
+df_cleaned = df_cleaned.dropna(subset=["CouncilArea"])
+```
 
-    YearBuilt: Left as NULL to avoid introducing bias — ensures age-related analysis remains accurate.
+### Convert data types
+Ensured columns have appropriate data types for analysis.
+```python
+# Convert 'Date' to datetime
+df_cleaned["Date"] = pd.to_datetime(df_cleaned["Date"], format="%d/%m/%Y")
 
-    CouncilArea: Filled missing values with "Unknown" for SQL-friendly grouping and filtering.
-
-### Data type conversions
-
-    Date: Converted to datetime, then reformatted to mm/dd/yyyy string for consistency.
-
-    Postcode, Propertycount, Car, Rooms, Price, Bedroom2, Bathroom: Converted to integers for accuracy.
-
-    YearBuilt: Left as float to retain NULL values (as Pandas requires float for NaN).
---- 
-
-
-### Duplicates
-
-    Checked and confirmed no duplicate rows in the dataset.
-
-### Outlier flagging
-
-    Flagged outliers in Price, Landsize, and BuildingArea if values exceeded the 99th percentile.
-
-    Added an is_outlier column (1 = outlier, 0 = typical data).
-
-### Export
-
-    Final cleaned dataset saved as cleaned_melb_data.xlsx (Excel format for ease of use).
+# Convert 'Postcode' and 'Propertycount' to integer
+df["Postcode"] = df["Postcode"].astype(int)
+df["Propertycount"] = df["Propertycount"].astype(int)
+```
+### Reset index
+```python
+df_cleaned = df_cleaned.reset_index(drop=True)
+```
 
 - [See full cleaning code](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Melbourne%20Housing.ipynb)
 ---
@@ -66,37 +63,48 @@ The following steps were applied using Python (Pandas):
 ##  SQL Analysis & Business Insights
 Below are example SQL queries used to analyze the cleaned Melbourne housing data.
 
-### What is the average price by council area (excluding outliers)?
+### Average Price by Region
+Finds regions with the highest and lowest average property prices.
 ```sql
 SELECT 
-    CouncilArea, 
+    Regionname, 
     ROUND(AVG(Price), 2) AS avg_price
 FROM 
     cleaned_melb_data
-WHERE 
-    is_outlier = 0
 GROUP BY 
-    CouncilArea
+    Regionname
 ORDER BY 
     avg_price DESC;
 ```
 
-### How did average price change by year or month?
-
+### Top 10 Suburbs with the Highest Average Land Size
+Identifies suburbs offering the largest properties on average.
 ```sql
-SELECT
-    SUBSTRING(Date, 7, 4) AS SaleYear,
-    ROUND(AVG(Price), 2) AS avg_price
-FROM
+SELECT 
+    Suburb, 
+    ROUND(AVG(Landsize), 2) AS avg_landsize
+FROM 
     cleaned_melb_data
-WHERE
-    is_outlier = 0
-GROUP BY
-    SaleYear
-ORDER BY
-    SaleYear;
+GROUP BY 
+    Suburb
+ORDER BY 
+    avg_landsize DESC
+LIMIT 10;
 ```
 
+### Number of Properties Sold by Year
+Tracks property sales volume over time.
+```sql
+SELECT 
+    YEAR(Date) AS sale_year, 
+    COUNT(*) AS total_sales
+FROM 
+    cleaned_melb_data
+GROUP BY 
+    sale_year
+ORDER BY 
+    sale_year;
+```
 - [See full SQL analysis queries](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_sql_analysis.sql)
 
 
