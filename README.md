@@ -57,7 +57,7 @@ df["Propertycount"] = df["Propertycount"].astype(int)
 df_cleaned = df_cleaned.reset_index(drop=True)
 ```
 
-- [See full cleaning code](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Melbourne%20Housing.ipynb)
+- [See full cleaning code](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/sql_melb_data.sql)
 ---
 
 ##  SQL Analysis & Business Insights
