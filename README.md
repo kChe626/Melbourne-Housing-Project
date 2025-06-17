@@ -111,11 +111,15 @@ ORDER BY
 
 ## Files
 
-    cleaned_melb_data.xlsx — Cleaned and ready for SQL import.
+[melb_data_cleaned — Python code for cleaning](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.ipynb)
+
+[cleaned_melb_data — Cleaned and ready for SQL import.](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/cleaned_melb_data.csv)
+
+[sql_melb_data — MySQL anaylsis](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/sql_melb_data.sql)
 
 
-## Author
 
-- Melbourne Housing dataset from [https://www.kaggle.com/datasets/dansbecker/melbourne-housing-snapshot/data
-]
+Dataset Source
+
+- Melbourne Housing dataset from [https://www.kaggle.com/datasets/dansbecker/melbourne-housing-snapshot/data]
 
