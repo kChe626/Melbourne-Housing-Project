@@ -22,7 +22,7 @@ The dataset includes information about property sales such as suburb, address, n
 
 ---
 
-## Data Cleaning Steps
+## Python Data Cleaning Steps
 
 ### Remove unnecessary columns
 
