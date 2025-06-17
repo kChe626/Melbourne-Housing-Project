@@ -57,7 +57,7 @@ df["Propertycount"] = df["Propertycount"].astype(int)
 df_cleaned = df_cleaned.reset_index(drop=True)
 ```
 
-- [See full cleaning code](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/sql_melb_data.sql)
+- [See full cleaning code](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.ipynb)
 ---
 
 ##  SQL Analysis & Business Insights
@@ -105,7 +105,7 @@ GROUP BY
 ORDER BY 
     sale_year;
 ```
-- [See full SQL analysis queries](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_sql_analysis.sql)
+- [See full SQL analysis queries](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/sql_melb_data.sql)
 
 
 
