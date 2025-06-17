@@ -106,7 +106,25 @@ ORDER BY
     sale_year;
 ```
 - [See full SQL analysis queries](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/sql_melb_data.sql)
+---
+## Power BI Dashboard
 
+![Dashboard](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Housing_Dashboard.gif)
+
+### Key Features
+
+KPI Cards: Displays total properties sold, average property price, maximum price, and total land size.
+
+Interactive slicers: Filter data dynamically by year, region, property type, and suburb.
+
+Charts and visuals:
+- Bar chart: Average price by region
+- Pie chart: Sales method distribution (with category, % and count)
+- Line chart: Sales volume over time with forecast option
+- Treemap: Top suburbs by total land size
+- Scatter plot: Price vs distance from CBD, with trendline
+
+---
 
 
 ## Files
@@ -117,7 +135,7 @@ ORDER BY
 
 [sql_melb_data — MySQL anaylsis](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/sql_melb_data.sql)
 
-
+[Power_BI_dashboard](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Power_Bi_melb_data.pbix)
 
 Dataset Source
 
