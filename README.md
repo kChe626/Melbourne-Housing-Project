@@ -6,8 +6,6 @@
 
 This project focuses on cleaning and preparing a real estate dataset of Melbourne housing sales. The objective was to apply data wrangling techniques using Python to prepare the data for SQL-based analysis and visualization. This process ensures clean, reliable, and SQL-compatible data for deeper analysis of housing market trends, pricing, and regional characteristics.
 
----
-
 
 ## Dataset
 
@@ -20,42 +18,41 @@ This project focuses on cleaning and preparing a real estate dataset of Melbourn
 The dataset includes information about property sales such as suburb, address, number of rooms, type, price, sale method, seller, date of sale, distance from the city, postcode, number of bedrooms and bathrooms, car spaces, land size, building area, year built, council area, latitude, longitude, region name, and property count.
 
 
----
-
 ## Python Data Cleaning Steps
 
-### Remove unnecessary columns
+- Standardized column names: Converted all column names to lowercase and replaced spaces with underscores for consistency.
+- Cleaned text fields: Lowercased and trimmed spaces in key text columns including suburb, seller_g, council_area, regionname, type, method, and address.
+- Converted date: Parsed the date column to datetime format (%d/%m/%Y), handling invalid values safely.
+- Converted numeric fields: Converted price, landsize, building_area, distance, car, bathroom, and bedroom2 to numeric types with missing or invalid values filled as 0.
+- Handled missing yearbuilt: Filled missing yearbuilt values with the median year to retain meaningful historical data.
+- Converted count fields: Converted bedroom2, bathroom, and car fields to integers for clean analysis of counts.
+- Standardized addresses: Trimmed and lowercased address for consistency in grouping or geocoding.
+- Removed duplicates: Dropped any exact duplicate rows to ensure data integrity.
 
-Removed columns that don’t contribute to analysis or have excessive missing data.
-```python
-df_cleaned = df.drop(columns=["Address"])
-df_cleaned = df_cleaned.drop(columns=["BuildingArea", "YearBuilt"])
+## Example cleaning snippet
+```sql
+# Standardize column names
+df.columns = df.columns.str.strip().str.lower().str.replace(' ', '_')
+
+# Convert date
+df['date'] = pd.to_datetime(df['date'].astype(str).str.strip(), format='%d/%m/%Y', errors='coerce')
+
+# Convert numeric fields
+num_cols = ['price', 'landsize', 'building_area', 'distance', 'car', 'bathroom', 'bedroom2']
+for col in num_cols:
+    df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
+
+# Handle yearbuilt
+median_yearbuilt = df['yearbuilt'].median()
+df['yearbuilt'] = pd.to_numeric(df['yearbuilt'], errors='coerce').fillna(median_yearbuilt)
+
+# Convert counts to int
+for col in ['bedroom2', 'bathroom', 'car']:
+    df[col] = df[col].astype(int)
 ```
+## Output
+- A cleaned dataset saved as [melb_data_cleaned.csv](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.xls), ready for SQL loading and BI visualization.
 
-### Handle missing data
-Filled or removed missing values to clean the dataset.
-```pyhton
-# Fill missing 'Car' values with 0
-df_cleaned["Car"] = df_cleaned["Car"].fillna(0)
-
-# Drop rows where 'CouncilArea' is missing
-df_cleaned = df_cleaned.dropna(subset=["CouncilArea"])
-```
-
-### Convert data types
-Ensured columns have appropriate data types for analysis.
-```python
-# Convert 'Date' to datetime
-df_cleaned["Date"] = pd.to_datetime(df_cleaned["Date"], format="%d/%m/%Y")
-
-# Convert 'Postcode' and 'Propertycount' to integer
-df["Postcode"] = df["Postcode"].astype(int)
-df["Propertycount"] = df["Propertycount"].astype(int)
-```
-### Reset index
-```python
-df_cleaned = df_cleaned.reset_index(drop=True)
-```
 
 - [See full cleaning code](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.ipynb)
 ---
