@@ -1,113 +1,72 @@
---- Average price by region
-SELECT 
-    Regionname, 
-    ROUND(AVG(Price), 2) AS avg_price
-FROM 
-    cleaned_melb_data
-GROUP BY 
-    Regionname
-ORDER BY 
-    avg_price DESC;
+-- Melbourne Housing SQL Queries
+-- Description: Business analysis on Melbourne Housing cleaned dataset
 
---- Average price by property type
+-- Top 5 suburbs by average price
 SELECT 
-    Type, 
-    ROUND(AVG(Price), 2) AS avg_price
-FROM 
-    cleaned_melb_data
-GROUP BY 
-    Type
-ORDER BY 
-    avg_price DESC;
+    suburb,
+    ROUND(AVG(price), 2) AS avg_price
+FROM melb_data_cleaned
+GROUP BY suburb
+ORDER BY avg_price DESC
+LIMIT 5;
 
---- Top 10 suburbs with the highest average land size
+-- Average price by property type
 SELECT 
-    Suburb, 
-    ROUND(AVG(Landsize), 2) AS avg_landsize
-FROM 
-    cleaned_melb_data
-GROUP BY 
-    Suburb
-ORDER BY 
-    avg_landsize DESC
-LIMIT 10;
+    type,
+    ROUND(AVG(price), 2) AS avg_price
+FROM melb_data_cleaned
+GROUP BY type
+ORDER BY avg_price DESC;
 
---- Number of properties sold by year
+-- Average building area by council area
 SELECT 
-    YEAR(Date) AS sale_year, 
-    COUNT(*) AS total_sales
-FROM 
-    cleaned_melb_data
-GROUP BY 
-    sale_year
-ORDER BY 
-    sale_year;
+    councilarea,
+    ROUND(AVG(buildingarea), 2) AS avg_building_area
+FROM melb_data_cleaned
+GROUP BY councilarea
+ORDER BY avg_building_area DESC;
 
---- Sales count by method
+-- Sales count by method
 SELECT 
-    Method, 
-    COUNT(*) AS method_count
-FROM 
-    cleaned_melb_data
-GROUP BY 
-    Method
-ORDER BY 
-    method_count DESC;
+    method,
+    COUNT(*) AS sales_count
+FROM melb_data_cleaned
+GROUP BY method
+ORDER BY sales_count DESC;
 
---- Average number of car spaces by region
+-- Top 5 council areas by total sales revenue
 SELECT 
-    Regionname, 
-    ROUND(AVG(Car), 2) AS avg_car_spaces
-FROM 
-    cleaned_melb_data
-GROUP BY 
-    Regionname
-ORDER BY 
-    avg_car_spaces DESC;
+    councilarea,
+    ROUND(SUM(price), 2) AS total_revenue
+FROM melb_data_cleaned
+GROUP BY councilarea
+ORDER BY total_revenue DESC
+LIMIT 5;
 
---- Price vs distance from the city
+-- Average land size by property type
 SELECT 
-    ROUND(Distance, 1) AS distance_km, 
-    ROUND(AVG(Price), 2) AS avg_price
-FROM 
-    cleaned_melb_data
-GROUP BY 
-    distance_km
-ORDER BY 
-    distance_km;
+    type,
+    ROUND(AVG(landsize), 2) AS avg_landsize
+FROM melb_data_cleaned
+GROUP BY type
+ORDER BY avg_landsize DESC;
 
---- Suburbs with the highest maximum price
-SELECT 
-    Suburb, 
-    MAX(Price) AS max_price
-FROM 
-    cleaned_melb_data
-GROUP BY 
-    Suburb
-ORDER BY 
-    max_price DESC
-LIMIT 10;
 
---- Average bathroom count by property type
+-- Top 5 sellers (agents) by number of properties sold
 SELECT 
-    Type, 
-    ROUND(AVG(Bathroom), 2) AS avg_bathrooms
-FROM 
-    cleaned_melb_data
-GROUP BY 
-    Type
-ORDER BY 
-    avg_bathrooms DESC;
+    sellerg,
+    COUNT(*) AS properties_sold
+FROM melb_data_cleaned
+GROUP BY sellerg
+ORDER BY properties_sold DESC
+LIMIT 5;
 
---- Average land size by property type and region
+
+-- Day of week sales count
 SELECT 
-    Regionname, 
-    Type, 
-    ROUND(AVG(Landsize), 2) AS avg_landsize
-FROM 
-    cleaned_melb_data
-GROUP BY 
-    Regionname, 
-    Type
-ORDER BY 
-    avg_landsize DESC;
+    DAYNAME(date) AS day_of_week,
+    COUNT(*) AS sales_count
+FROM melb_data_cleaned
+GROUP BY day_of_week
+ORDER BY sales_count DESC;
+
