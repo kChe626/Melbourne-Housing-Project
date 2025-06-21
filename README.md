@@ -9,14 +9,8 @@ This project focuses on cleaning and preparing a real estate dataset of Melbourn
 
 ## Dataset
 
-    Source: Melbourne housing dataset
-
-    Rows: 13,580
-
-    Columns: 21
-
-The dataset includes information about property sales such as suburb, address, number of rooms, type, price, sale method, seller, date of sale, distance from the city, postcode, number of bedrooms and bathrooms, car spaces, land size, building area, year built, council area, latitude, longitude, region name, and property count.
-
+- Source: [Melbourne Housing dataset](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data.csv)
+- Columns: Includes suburb, address, rooms, type, price, date, distance, bedroom2, bathroom, car, landsize, buildingarea, yearbuilt, councilarea, regionname, sellerg, method, latitude, longitude, and propertycount.
 
 ## Python Data Cleaning Steps
 
