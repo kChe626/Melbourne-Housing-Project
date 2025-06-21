@@ -24,7 +24,7 @@ This project focuses on cleaning and preparing a real estate dataset of Melbourn
 - Removed duplicates: Dropped any exact duplicate rows to ensure data integrity.
 
 ## Example cleaning snippet
-```sql
+```python
 # Standardize column names
 df.columns = df.columns.str.strip().str.lower().str.replace(' ', '_')
 
@@ -51,84 +51,71 @@ for col in ['bedroom2', 'bathroom', 'car']:
 - [See full cleaning code](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.ipynb)
 ---
 
-##  SQL Analysis & Business Insights
-Below are example SQL queries used to analyze the cleaned Melbourne housing data.
+##  SQL Analysis Process
+The cleaned Melbourne housing dataset was loaded into a SQL database for structured querying and deeper analysis. SQL was used to generate key business insights on housing trends, prices, and characteristics.
 
-### Average Price by Region
-Finds regions with the highest and lowest average property prices.
-```sql
-SELECT 
-    Regionname, 
-    ROUND(AVG(Price), 2) AS avg_price
-FROM 
-    cleaned_melb_data
-GROUP BY 
-    Regionname
-ORDER BY 
-    avg_price DESC;
-```
+## Key analyses performed
+- Top suburbs by median price: Identified suburbs with the highest median house prices.
+- Average price by property type: Compared average prices for different property types (e.g., house, unit, townhouse).
+- Monthly sales volume: Tracked how many properties were sold per month to uncover seasonal trends.
+- Average building area by council area: Assessed which council areas tend to have larger or smaller properties.
 
-### Top 10 Suburbs with the Highest Average Land Size
-Identifies suburbs offering the largest properties on average.
-```sql
-SELECT 
-    Suburb, 
-    ROUND(AVG(Landsize), 2) AS avg_landsize
-FROM 
-    cleaned_melb_data
-GROUP BY 
-    Suburb
-ORDER BY 
-    avg_landsize DESC
-LIMIT 10;
-```
+[See full analysis code SQL](https://github.com/kChe626/Melbourne-Housing-Project)
 
-### Number of Properties Sold by Year
-Tracks property sales volume over time.
+## Example SQL snippet
 ```sql
+-- Top 5 suburbs by average price
 SELECT 
-    YEAR(Date) AS sale_year, 
-    COUNT(*) AS total_sales
-FROM 
-    cleaned_melb_data
-GROUP BY 
-    sale_year
-ORDER BY 
-    sale_year;
+    suburb,
+    ROUND(AVG(price), 2) AS avg_price
+FROM melb_data_cleaned
+GROUP BY suburb
+ORDER BY avg_price DESC
+LIMIT 5;
+
+-- Average building area by council area
+SELECT 
+    councilarea,
+    ROUND(AVG(buildingarea), 2) AS avg_building_area
+FROM melb_data_cleaned
+GROUP BY councilarea
+ORDER BY avg_building_area DESC;
 ```
-- [See full SQL analysis queries](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/sql_melb_data.sql)
----
+## Output
+- The queries provided clear insights into housing prices, regional differences, and market behavior.
+- The results formed the basis for Power BI dashboards that visualized these patterns interactively.
+
 ## Power BI Dashboard
+
+An interactive Power BI dashboard was developed to visualize key insights from the Melbourne housing dataset. The dashboard integrates data cleaned and prepared through Python and SQL analysis to provide a clear view of the housing market trends.
 
 ![Dashboard](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Housing_Dashboard.gif)
 
-### Key Features
+## Key Features
 
-KPI Cards: Displays total properties sold, average property price, maximum price, and total land size.
+- Total sales, average price, maximum price, and sum of land size indicators at a glance.
+- Average price by region using bar charts to compare housing costs across regions.
+- Sales trends over time with a line chart showing total sales by year, quarter, month, and day.
+- Sales method distribution with a pie chart highlighting the proportion of sales methods (e.g., auction, private sale).
+- Sum of land size by suburb with a treemap for quick comparison of land distribution across suburbs.
+- Price vs. distance scatter plot showing how price varies with distance from the city center, colored by region and method.
 
-Interactive slicers: Filter data dynamically by year, region, property type, and suburb.
+## Dashboard controls:
 
-Charts and visuals:
-- Bar chart: Average price by region
-- Pie chart: Sales method distribution (with category, % and count)
-- Line chart: Sales volume over time with forecast option
-- Treemap: Top suburbs by total land size
-- Scatter plot: Price vs distance from CBD, with trendline
-
----
-
+- Interactive filters for year, regionname, property type, and suburb to dynamically explore the data.
+- Tooltips and legends for clearer interpretation of visual elements.
 
 ## Files
 
 [melb_data_cleaned — Python code for cleaning](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.ipynb)
 
-[cleaned_melb_data — Cleaned and ready for SQL import.](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/cleaned_melb_data.csv)
+[cleaned_melb_data — Cleaned and ready for SQL import.](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.xls)
 
 [sql_melb_data — MySQL anaylsis](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/sql_melb_data.sql)
 
 [Power_BI_dashboard](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Power_Bi_melb_data.pbix)
 
-Dataset Source
+## Dataset Source
 
 - Melbourne Housing dataset from [https://www.kaggle.com/datasets/dansbecker/melbourne-housing-snapshot/data]
 
