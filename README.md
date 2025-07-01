@@ -100,7 +100,7 @@ An interactive Power BI dashboard was developed to visualize key insights from t
 - Sum of land size by suburb with a treemap for quick comparison of land distribution across suburbs.
 - Price vs. distance scatter plot showing how price varies with distance from the city center, colored by region and method.
 
-- [See full dashboard](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Power_Bi_melb_data.pbix)
+- [Download for dashboard](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Power_Bi_melb_data.pbix)
   
 ## Files
 
