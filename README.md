@@ -60,7 +60,7 @@ The cleaned Melbourne housing dataset was loaded into a SQL database for structu
 - Monthly sales volume: Tracked how many properties were sold per month to uncover seasonal trends.
 - Average building area by council area: Assessed which council areas tend to have larger or smaller properties.
 
-[See full analysis code SQL](https://github.com/kChe626/Melbourne-Housing-Project)
+[See full analysis code SQL](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/sql_melb_data.sql)
 
 ## Example SQL snippet
 ```sql
