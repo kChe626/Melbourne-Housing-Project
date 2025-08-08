@@ -1,118 +1,119 @@
+# **Melbourne Housing Data Project — Python Cleaning, SQL Analysis & Power BI Dashboard**  
 ![Python](https://img.shields.io/badge/Python-3776AB.svg?style=for-the-badge&logo=Python&logoColor=white)
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
 ![Power BI](https://img.shields.io/badge/power_bi-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
 
-# Melbourne Housing Data Project
+---
 
-This project focuses on cleaning and preparing a real estate dataset of Melbourne housing sales. The objective was to apply data wrangling techniques using Python to prepare the data for SQL-based analysis and visualization. This process ensures clean, reliable, and SQL-compatible data for deeper analysis of housing market trends, pricing, and regional characteristics.
+## **Overview**  
+This project analyzes **Melbourne housing sales data** through Python data cleaning, SQL analysis, and an interactive Power BI dashboard.  
+The goal is to clean raw housing data, extract market insights, and visualize key trends for property pricing and sales behavior.
 
+---
 
-## Dataset
+## **Dataset**
+- **Source:** [melb_data.csv](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data.csv)  
+- **Columns:** suburb, address, rooms, type, price, date, distance, bedroom2, bathroom, car, landsize, buildingarea, yearbuilt, councilarea, regionname, method, seller_g, latitude, longitude, propertycount
 
-- Source: [Melbourne Housing dataset](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data.csv)
-- Columns: Includes suburb, address, rooms, type, price, date, distance, bedroom2, bathroom, car, landsize, buildingarea, yearbuilt, councilarea, regionname, sellerg, method, latitude, longitude, and propertycount.
+---
 
-## Python Data Cleaning Steps
+## **Objectives**
+- Standardize and clean the dataset for SQL compatibility  
+- Explore market trends through SQL queries  
+- Build a Power BI dashboard for interactive analysis  
 
-- Standardized column names: Converted all column names to lowercase and replaced spaces with underscores for consistency.
-- Cleaned text fields: Lowercased and trimmed spaces in key text columns including suburb, seller_g, council_area, regionname, type, method, and address.
-- Converted date: Parsed the date column to datetime format (%d/%m/%Y), handling invalid values safely.
-- Converted numeric fields: Converted price, landsize, building_area, distance, car, bathroom, and bedroom2 to numeric types with missing or invalid values filled as 0.
-- Handled missing yearbuilt: Filled missing yearbuilt values with the median year to retain meaningful historical data.
-- Converted count fields: Converted bedroom2, bathroom, and car fields to integers for clean analysis of counts.
-- Standardized addresses: Trimmed and lowercased address for consistency in grouping or geocoding.
-- Removed duplicates: Dropped any exact duplicate rows to ensure data integrity.
+---
 
-## Example cleaning snippet
+## **Data Cleaning Process (Python)**
+**Key Steps:**
+- Standardized column names and text formatting  
+- Converted `date` to proper datetime format  
+- Converted numeric fields and filled missing values  
+- Imputed `yearbuilt` with median year for missing entries  
+- Removed duplicates and validated dataset
+
+**Example Snippets:**  
 ```python
 # Standardize column names
 df.columns = df.columns.str.strip().str.lower().str.replace(' ', '_')
 
-# Convert date
-df['date'] = pd.to_datetime(df['date'].astype(str).str.strip(), format='%d/%m/%Y', errors='coerce')
+# Convert date to datetime
+df['date'] = pd.to_datetime(df['date'], format='%d/%m/%Y', errors='coerce')
 
-# Convert numeric fields
-num_cols = ['price', 'landsize', 'building_area', 'distance', 'car', 'bathroom', 'bedroom2']
-for col in num_cols:
-    df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
-
-# Handle yearbuilt
+# Fill missing yearbuilt with median
 median_yearbuilt = df['yearbuilt'].median()
 df['yearbuilt'] = pd.to_numeric(df['yearbuilt'], errors='coerce').fillna(median_yearbuilt)
-
-# Convert counts to int
-for col in ['bedroom2', 'bathroom', 'car']:
-    df[col] = df[col].astype(int)
 ```
-## Output
-- A cleaned dataset saved as [melb_data_cleaned.csv](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.xls), ready for SQL loading and BI visualization.
 
+**Full Cleaning Script:** [melb_data_cleaned.ipynb](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.ipynb)  
+**Cleaned Dataset:** [melb_data_cleaned.xls](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.xls)
 
-- [See full cleaning code](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.ipynb)
 ---
 
-##  SQL Analysis Process
-The cleaned Melbourne housing dataset was loaded into a SQL database for structured querying and deeper analysis. SQL was used to generate key business insights on housing trends, prices, and characteristics.
+## **SQL Analysis**
+**Objectives:**
+- Identify suburbs with the highest average property prices  
+- Compare average prices by property type  
+- Track monthly sales volumes  
+- Assess building area averages by council area
 
-## Key analyses performed
-- Top suburbs by median price: Identified suburbs with the highest median house prices.
-- Average price by property type: Compared average prices for different property types (e.g., house, unit, townhouse).
-- Monthly sales volume: Tracked how many properties were sold per month to uncover seasonal trends.
-- Average building area by council area: Assessed which council areas tend to have larger or smaller properties.
-
-[See full analysis code SQL](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/sql_melb_data.sql)
-
-## Example SQL snippet
+**Example Queries:**
 ```sql
 -- Top 5 suburbs by average price
-SELECT 
-    suburb,
-    ROUND(AVG(price), 2) AS avg_price
+SELECT suburb, ROUND(AVG(price), 2) AS avg_price
 FROM melb_data_cleaned
 GROUP BY suburb
 ORDER BY avg_price DESC
 LIMIT 5;
 
 -- Average building area by council area
-SELECT 
-    councilarea,
-    ROUND(AVG(buildingarea), 2) AS avg_building_area
+SELECT councilarea, ROUND(AVG(buildingarea), 2) AS avg_building_area
 FROM melb_data_cleaned
 GROUP BY councilarea
 ORDER BY avg_building_area DESC;
 ```
-## Output
-- The queries provided clear insights into housing prices, regional differences, and market behavior.
-- The results formed the basis for Power BI dashboards that visualized these patterns interactively.
 
-## Power BI Dashboard
+**Full Analysis Script:** [sql_melb_data.sql](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/sql_melb_data.sql)
 
-An interactive Power BI dashboard was developed to visualize key insights from the Melbourne housing dataset. The dashboard integrates data cleaned and prepared through Python and SQL analysis to provide a clear view of the housing market trends.
+---
 
-![Dashboard](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Housing_Dashboard.gif)
+## **Key Insights**
+- Certain suburbs consistently have higher median prices than others  
+- Houses generally have larger land sizes compared to units and townhouses  
+- Sales volume shows seasonal fluctuations aligned with market cycles  
+- Properties closer to the city center tend to have higher prices
 
-## Key Features
+---
 
-- Total sales, average price, maximum price, and sum of land size indicators at a glance.
-- Average price by region using bar charts to compare housing costs across regions.
-- Sales trends over time with a line chart showing total sales by year, quarter, month, and day.
-- Sales method distribution with a pie chart highlighting the proportion of sales methods (e.g., auction, private sale).
-- Sum of land size by suburb with a treemap for quick comparison of land distribution across suburbs.
-- Price vs. distance scatter plot showing how price varies with distance from the city center, colored by region and method.
+## **Preview**
+![Melbourne Housing Dashboard](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Housing_Dashboard.gif)
 
-- [Download for dashboard](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Power_Bi_melb_data.pbix)
-  
-## Files
+---
 
-[melb_data_cleaned — Python code for cleaning](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.ipynb)
+## **Use Cases**
+- **Real Estate Analysis:** Compare property values by region and type  
+- **Urban Planning:** Assess land and building size distributions  
+- **Investment Strategy:** Identify high-value suburbs and growth areas  
+- **Market Monitoring:** Track housing sales trends over time
 
-[cleaned_melb_data — Cleaned and ready for SQL import.](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.xls)
+---
 
-[sql_melb_data — MySQL anaylsis](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/sql_melb_data.sql)
+## **How to Open**
+1. Download the Power BI dashboard: [Power_Bi_melb_data.pbix](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Power_Bi_melb_data.pbix)  
+2. Open in Power BI Desktop  
+3. Connect to the cleaned dataset: [melb_data_cleaned.xls](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.xls)  
 
-[Power_BI_dashboard](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Power_Bi_melb_data.pbix)
+---
+
+## **Files**
+- [Python Cleaning Script](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.ipynb)
+- [Cleaned Dataset](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.xls) 
+- [SQL Analysis Script](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/sql_melb_data.sql)   
+- [Power BI Dashboard](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Power_Bi_melb_data.pbix)
+
 
 ## Dataset Source
 
 - Melbourne Housing dataset from [https://www.kaggle.com/datasets/dansbecker/melbourne-housing-snapshot/data]
+
 
