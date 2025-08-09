@@ -105,6 +105,11 @@ ORDER BY avg_building_area DESC;
 
 ---
 
+## **Business Relevance**
+This analysis supports real estate and municipal planning operations by highlighting regional pricing trends, sales cycles, and property characteristics. These insights assist in resource allocation, project prioritization, and urban development planning.
+
+---
+
 ## **Files**
 - [Python Cleaning Script](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.ipynb)
 - [Cleaned Dataset](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.xls) 
