@@ -12,7 +12,7 @@ The goal is to clean raw housing data, extract market insights, and visualize ke
 ---
 
 ## **Dataset**
-- **Source:** [melb_data.csv](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data.csv)  
+- **Source:** [melb_data.csv](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Melbourne_housing_Dashboard/data/melb_data.csv)  
 - **Columns:** suburb, address, rooms, type, price, date, distance, bedroom2, bathroom, car, landsize, buildingarea, yearbuilt, councilarea, regionname, method, seller_g, latitude, longitude, propertycount
 
 ---
@@ -46,7 +46,7 @@ df['yearbuilt'] = pd.to_numeric(df['yearbuilt'], errors='coerce').fillna(median_
 ```
 
 **Full Cleaning Script:** [melb_data_cleaned.ipynb](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.ipynb)  
-**Cleaned Dataset:** [melb_data_cleaned.xls](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.xls)
+**Cleaned Dataset:** [melb_data_cleaned.xls](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Melbourne_housing_Dashboard/data/melb_data_cleaned.xls)
 
 ---
 
@@ -73,7 +73,7 @@ GROUP BY councilarea
 ORDER BY avg_building_area DESC;
 ```
 
-**Full Analysis Script:** [sql_melb_data.sql](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/sql_melb_data.sql)
+**Full Analysis Script:** [sql_melb_data.sql](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Melbourne_housing_Dashboard/scripts/sql_melb_data.sql)
 
 ---
 
@@ -86,7 +86,7 @@ ORDER BY avg_building_area DESC;
 ---
 
 ## **Preview**
-![Melbourne Housing Dashboard](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Housing_Dashboard.gif)
+![Melbourne Housing Dashboard](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Melbourne_housing_Dashboard/image/Housing_Dashboard.gif)
 
 ---
 
@@ -99,9 +99,9 @@ ORDER BY avg_building_area DESC;
 ---
 
 ## **How to Open**
-1. Download the Power BI dashboard: [Power_Bi_melb_data.pbix](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Power_Bi_melb_data.pbix)  
+1. Download the Power BI dashboard: [Power_Bi_melb_data.pbix](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Melbourne_housing_Dashboard/scripts/melb_data_cleaned.ipynb)  
 2. Open in Power BI Desktop  
-3. Connect to the cleaned dataset: [melb_data_cleaned.xls](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.xls)  
+3. Connect to the cleaned dataset: [melb_data_cleaned.xls](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Melbourne_housing_Dashboard/data/melb_data_cleaned.xls)  
 
 ---
 
@@ -111,9 +111,9 @@ This analysis supports real estate and municipal planning operations by highligh
 ---
 
 ## **Files**
-- [Python Cleaning Script](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.ipynb)
-- [Cleaned Dataset](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.xls) 
-- [SQL Analysis Script](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/sql_melb_data.sql)   
+- [Python Cleaning Script](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Melbourne_housing_Dashboard/scripts/melb_data_cleaned.ipynb)
+- [Cleaned Dataset](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Melbourne_housing_Dashboard/data/melb_data_cleaned.xls) 
+- [SQL Analysis Script](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Melbourne_housing_Dashboard/scripts/sql_melb_data.sql)   
 - [Power BI Dashboard](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Power_Bi_melb_data.pbix)
 
 
