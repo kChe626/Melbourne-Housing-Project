@@ -99,7 +99,7 @@ ORDER BY avg_building_area DESC;
 ---
 
 ## **How to Open**
-1. Download the Power BI dashboard: [Power_Bi_melb_data.pbix](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Melbourne_housing_Dashboard/scripts/melb_data_cleaned.ipynb)  
+1. Download the Power BI dashboard: [Power_Bi_melb_data.pbix](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Melbourne_housing_Dashboard/Power_Bi_melb_data.pbix)  
 2. Open in Power BI Desktop  
 3. Connect to the cleaned dataset: [melb_data_cleaned.xls](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Melbourne_housing_Dashboard/data/melb_data_cleaned.xls)  
 
@@ -114,7 +114,7 @@ This analysis supports real estate and municipal planning operations by highligh
 - [Python Cleaning Script](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Melbourne_housing_Dashboard/scripts/melb_data_cleaned.ipynb)
 - [Cleaned Dataset](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Melbourne_housing_Dashboard/data/melb_data_cleaned.xls) 
 - [SQL Analysis Script](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Melbourne_housing_Dashboard/scripts/sql_melb_data.sql)   
-- [Power BI Dashboard](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Power_Bi_melb_data.pbix)
+- [Power BI Dashboard](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Melbourne_housing_Dashboard/Power_Bi_melb_data.pbix)
 
 
 ## Dataset Source
