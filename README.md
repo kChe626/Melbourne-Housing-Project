@@ -45,7 +45,7 @@ median_yearbuilt = df['yearbuilt'].median()
 df['yearbuilt'] = pd.to_numeric(df['yearbuilt'], errors='coerce').fillna(median_yearbuilt)
 ```
 
-**Full Cleaning Script:** [melb_data_cleaned.ipynb](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/melb_data_cleaned.ipynb)  
+**Full Cleaning Script:** [melb_data_cleaned.ipynb](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Melbourne_housing_Dashboard/scripts/melb_data_cleaned.ipynb)  
 **Cleaned Dataset:** [melb_data_cleaned.xls](https://github.com/kChe626/Melbourne-Housing-Project/blob/main/Melbourne_housing_Dashboard/data/melb_data_cleaned.xls)
 
 ---
