@@ -6,7 +6,7 @@
 ---
 
 ## **Overview**  
-This project analyzes **Melbourne housing sales data** through Python data cleaning, SQL analysis, and an interactive Power BI dashboard.  
+This project analyzes Melbourne housing sales data through Python data cleaning, SQL analysis, and an interactive Power BI dashboard.  
 The goal is to clean raw housing data, extract market insights, and visualize key trends for property pricing and sales behavior.
 
 ---
